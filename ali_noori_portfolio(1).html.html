@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Noori – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7C3AED;
+    --pink: #EC4899;
+    --cyan: #06B6D4;
+    --yellow: #F59E0B;
+    --green: #10B981;
+    --dark: #0F0F1A;
+    --card: #1A1A2E;
+    --text: #F1F5F9;
+    --muted: #94A3B8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body.light {
+  --dark: #F8F9FA;
+  --card: #FFFFFF;
+  --text: #0F0F1A;
+  --muted: #555555;
+}
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15,15,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(124,58,237,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .lang-toggle {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    border: none; color: white; padding: 0.4rem 1rem;
+    border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 6rem 2rem 3rem;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(124,58,237,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 30%, rgba(236,72,153,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 60% 80%, rgba(6,182,212,0.1) 0%, transparent 70%);
+  }
+
+  .hero-content { position: relative; z-index: 1; text-align: center; max-width: 800px; }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: #A78BFA;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--purple), var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white; padding: 0.8rem 2rem;
+    border-radius: 8px; text-decoration: none;
+    font-weight: 600; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text); padding: 0.8rem 2rem;
+    border-radius: 8px; text-decoration: none;
+    font-weight: 500; transition: border-color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--purple); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--purple);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 3rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.3); }
+
+  .skill-card-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+  }
+
+  /* EXPERIENCE */
+  .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .timeline-item {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .timeline-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    margin-top: 6px;
+  }
+
+  .timeline-year {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-title { font-weight: 600; margin-bottom: 0.3rem; }
+  .timeline-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .timeline-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+  /* LANGUAGES */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .lang-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .lang-flag { font-size: 1.8rem; }
+  .lang-name { font-weight: 600; font-size: 0.95rem; }
+  .lang-level { color: var(--muted); font-size: 0.8rem; }
+
+  /* CONTACT */
+  .contact-box {
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(236,72,153,0.1));
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .contact-box h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-box p { color: var(--muted); margin-bottom: 2rem; }
+
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .contact-link {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: rgba(124,58,237,0.2); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">AN</div>
+  <div class="nav-links">
+    <a href="#skills" data-de="Skills" data-en="Skills">Skills</a>
+    <a href="#experience" data-de="Erfahrung" data-en="Experience">Erfahrung</a>
+    <a href="#education" data-de="Studium" data-en="Education">Studium</a>
+    <a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a>
+  </div>
+  <button class="lang-toggle" onclick="toggleLang()">🌐 EN</button>
+  <button id="themeToggle" onclick="toggleTheme()" 
+style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+color:white;padding:0.4rem 1rem;border-radius:20px;cursor:pointer;
+font-size:0.85rem;font-family:'Space Grotesk',sans-serif;">
+🌙 Dark
+</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span data-de="👋 Willkommen auf meinem Portfolio" data-en="👋 Welcome to my Portfolio">👋 Willkommen auf meinem Portfolio</span>
+    </div>
+    <h1>
+      <span class="gradient-text">Ali Noori</span><br>
+      <span data-de="Wirtschaftsinformatik Student" data-en="Business Informatics Student">Wirtschaftsinformatik Student</span>
+    </h1>
+    <p data-de="4. Fachsemester an der Philipps-Universität Marburg. Leidenschaftlich für Datenanalyse, Softwareentwicklung und digitale Prozesse." 
+       data-en="4th semester at Philipps University Marburg. Passionate about data analysis, software development and digital processes.">
+      4. Fachsemester an der Philipps-Universität Marburg. Leidenschaftlich für Datenanalyse, Softwareentwicklung und digitale Prozesse.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary" data-de="Kontakt aufnehmen" data-en="Get in touch">Kontakt aufnehmen</a>
+      <a href="#experience" class="btn-secondary" data-de="Meine Erfahrung" data-en="My Experience">Meine Erfahrung</a>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label" data-de="WAS ICH KANN" data-en="WHAT I DO">WAS ICH KANN</div>
+  <div class="section-title" data-de="Meine Skills & Kenntnisse" data-en="My Skills & Knowledge">Meine Skills & Kenntnisse</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(124,58,237,0.15)">💻</div>
+      <h3 data-de="Programmierung" data-en="Programming">Programmierung</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">OOP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(236,72,153,0.15)">🗄️</div>
+      <h3 data-de="Datenbanken & Analyse" data-en="Databases & Analysis">Datenbanken & Analyse</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Datenbanksysteme</span>
+        <span class="skill-tag">Statistik</span>
+        <span class="skill-tag">R Studio</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(6,182,212,0.15)">⚙️</div>
+      <h3 data-de="Tools & Software" data-en="Tools & Software">Tools & Software</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SAP</span>
+        <span class="skill-tag">GitLab</span>
+        <span class="skill-tag">IntelliJ</span>
+        <span class="skill-tag">MS Office</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(245,158,11,0.15)">🔄</div>
+      <h3 data-de="Methoden" data-en="Methods">Methoden</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Agile</span>
+        <span class="skill-tag">Scrum</span>
+        <span class="skill-tag">BPMN</span>
+        <span class="skill-tag">User Stories</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label" data-de="BERUFSERFAHRUNG" data-en="WORK EXPERIENCE">BERUFSERFAHRUNG</div>
+  <div class="section-title" data-de="Praktische Erfahrung" data-en="Practical Experience">Praktische Erfahrung</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--purple)"></div>
+      <div>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-title" data-de="Softwaretechnikpraktikum" data-en="Software Engineering Internship">Softwaretechnikpraktikum</div>
+        <div class="timeline-sub">Philipps-Universität Marburg</div>
+        <div class="timeline-desc" data-de="Teamarbeit mit IntelliJ & GitLab, User Stories, agile Methoden, Software Engineering Grundlagen." data-en="Teamwork with IntelliJ & GitLab, user stories, agile methods, software engineering fundamentals.">Teamarbeit mit IntelliJ & GitLab, User Stories, agile Methoden, Software Engineering Grundlagen.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--cyan)"></div>
+      <div>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-title" data-de="Statistikpraktikum" data-en="Statistics Internship">Statistikpraktikum</div>
+        <div class="timeline-sub">Philipps-Universität Marburg</div>
+        <div class="timeline-desc" data-de="Statistische Analysen mit R, Auswertung und Interpretation von Datensätzen." data-en="Statistical analyses with R, evaluation and interpretation of datasets.">Statistische Analysen mit R, Auswertung und Interpretation von Datensätzen.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--pink)"></div>
+      <div>
+        <div class="timeline-year">2025</div>
+        <div class="timeline-title" data-de="Programmierpraktikum" data-en="Programming Internship">Programmierpraktikum</div>
+        <div class="timeline-sub">Philipps-Universität Marburg</div>
+        <div class="timeline-desc" data-de="Entwicklung von Java-Anwendungen, spielbasierte Programmierprojekte, objektorientierte Programmierung." data-en="Development of Java applications, game-based programming projects, object-oriented programming.">Entwicklung von Java-Anwendungen, spielbasierte Programmierprojekte, objektorientierte Programmierung.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--yellow)"></div>
+      <div>
+        <div class="timeline-year">2023–2024</div>
+        <div class="timeline-title" data-de="Fachberater – Jahrespraktikum" data-en="Technical Advisor – Annual Internship">Fachberater – Jahrespraktikum</div>
+        <div class="timeline-sub">Vodafone Friedberg</div>
+        <div class="timeline-desc" data-de="Beratung von 4–10 Kunden täglich, Arbeit mit betrieblichen IT-Systemen, Kommunikations- und Problemlösungskompetenzen." data-en="Advising 4–10 customers daily, working with enterprise IT systems, communication and problem-solving skills.">Beratung von 4–10 Kunden täglich, Arbeit mit betrieblichen IT-Systemen, Kommunikations- und Problemlösungskompetenzen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label" data-de="AUSBILDUNG" data-en="EDUCATION">AUSBILDUNG</div>
+  <div class="section-title" data-de="Bildungsweg" data-en="Education">Bildungsweg</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--green)"></div>
+      <div>
+        <div class="timeline-year" data-de="2024 – heute" data-en="2024 – present">2024 – heute</div>
+        <div class="timeline-title">B.Sc. Wirtschaftsinformatik</div>
+        <div class="timeline-sub">Philipps-Universität Marburg</div>
+        <div class="timeline-desc" data-de="Schwerpunkte: Datenbanken, Softwaretechnik, Digitalisierung, Operations Research, Statistik." data-en="Focus: databases, software engineering, digitalization, operations research, statistics.">Schwerpunkte: Datenbanken, Softwaretechnik, Digitalisierung, Operations Research, Statistik.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--muted)"></div>
+      <div>
+        <div class="timeline-year">2020–2023</div>
+        <div class="timeline-title" data-de="Allgemeine Fachhochschulreife" data-en="University of Applied Sciences Entrance Qualification">Allgemeine Fachhochschulreife</div>
+        <div class="timeline-sub">Burggymnasium Friedberg/Hessen</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+  <div class="timeline-dot" style="background:var(--muted)"></div>
+  <div>
+    <div class="timeline-year">2014–2020</div>
+    <div class="timeline-title" data-de="Mittlere Reife" data-en="Secondary School Certificate">Mittlere Reife</div>
+    <div class="timeline-sub">Gesamtschule Konradsdorf, Ortenberg</div>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section>
+  <div class="section-label" data-de="SPRACHEN" data-en="LANGUAGES">SPRACHEN</div>
+  <div class="section-title" data-de="Sprachkenntnisse" data-en="Language Skills">Sprachkenntnisse</div>
+  <div class="lang-grid">
+    <div class="lang-card">
+      <div class="lang-flag">🇩🇪</div>
+      <div>
+        <div class="lang-name">Deutsch</div>
+        <div class="lang-level" data-de="Fließend in Wort und Schrift" data-en="Fluent in speech and writing">Fließend in Wort und Schrift</div>
+      </div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇬🇧</div>
+      <div>
+        <div class="lang-name">Englisch</div>
+        <div class="lang-level" data-de="Sehr gut" data-en="Very good">Sehr gut</div>
+      </div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇪🇸</div>
+      <div>
+        <div class="lang-name">Spanisch</div>
+        <div class="lang-level" data-de="Gut" data-en="Good">Gut</div>
+      </div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇮🇷</div>
+      <div>
+        <div class="lang-name">Persisch</div>
+        <div class="lang-level" data-de="Sehr gut" data-en="Very good">Sehr gut</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="section-label" data-de="INTERESSEN" data-en="INTERESTS">INTERESSEN</div>
+  <div class="section-title" data-de="Persönliche Interessen" data-en="Personal Interests">Persönliche Interessen</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(124,58,237,0.15)">🚴</div>
+      <h3 data-de="Fahrradfahren" data-en="Cycling">Fahrradfahren</h3>
+      <div class="skill-tags"><span class="skill-tag" data-de="" data-en=""></span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(236,72,153,0.15)">💃</div>
+      <h3 data-de="Tanzen" data-en="Dancing">Tanzen</h3>
+      <div class="skill-tags"><span class="skill-tag" data-de="Kreativität" data-en="Creativity">Kreativität</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(6,182,212,0.15)">♟️</div>
+      <h3 data-de="Schachspielen" data-en="Chess">Schachspielen</h3>
+      <div class="skill-tags"><span class="skill-tag" data-de="Strategie" data-en="Strategy">Strategie</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon" style="background:rgba(16,185,129,0.15)">💻</div>
+      <h3 data-de="Programmieren" data-en="Programming">Programmieren</h3>
+      <div class="skill-tags"><span class="skill-tag">Java</span><span class="skill-tag">HTML</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <h2 data-de="Lass uns in Kontakt treten! 🚀" data-en="Let's get in touch! 🚀">Lass uns in Kontakt treten! 🚀</h2>
+    <p data-de="Ich bin auf der Suche nach einer Werkstudentenstelle im Bereich IT, Datenanalyse oder Digitalisierung." data-en="I am looking for a working student position in IT, data analysis or digitalization.">Ich bin auf der Suche nach einer Werkstudentenstelle im Bereich IT, Datenanalyse oder Digitalisierung.</p>
+    <div class="contact-links">
+<a href="#" onclick="navigator.clipboard.writeText('alinoori30072002@gmail.com'); alert('E-Mail kopiert! 📋')" class="contact-link">✉️ alinoori30072002@gmail.com</a>
+     <a href="tel:+4915209741599" class="contact-link">📱 +49 15209741599</a>
+<a href="#" onclick="
+  var pw = prompt('Bitte Passwort eingeben:');
+  if(pw === 'UbiStack300720021!@') {
+    window.open('Lebenslauf_Noori 1111.pdf');
+  } else {
+    alert('Falsches Passwort!');
+  }
+" class="contact-link">📄 Lebenslauf herunterladen</a><a href="Moduluebersicht schlicht.pdf" download class="contact-link">📋 Moduluebersicht herunterladen</a>  
+</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ali Noori · <span data-de="Wirtschaftsinformatik Student · Philipps-Universität Marburg" data-en="Business Informatics Student · Philipps University Marburg">Wirtschaftsinformatik Student · Philipps-Universität Marburg</span></p>
+</footer>
+
+<script>
+  let isEN = false;
+
+  function toggleLang() {
+    isEN = !isEN;
+    document.querySelector('.lang-toggle').textContent = isEN ? '🌐 DE' : '🌐 EN';
+    document.querySelectorAll('[data-de]').forEach(el => {
+      el.textContent = isEN ? el.getAttribute('data-en') : el.getAttribute('data-de');
+    });
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+<style>
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+document.querySelectorAll('.skill-card, .timeline-item, .lang-card').forEach(el => {
+  el.classList.add('fade-in');
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<!-- Zurück nach oben Button -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" 
+style="position:fixed;bottom:2rem;right:2rem;background:linear-gradient(135deg,#7C3AED,#EC4899);
+color:white;border:none;width:50px;height:50px;border-radius:50%;font-size:1.5rem;
+cursor:pointer;display:none;z-index:999;box-shadow:0 4px 15px rgba(124,58,237,0.4)">↑</button>
+
+<!-- Ladeanimation -->
+<div id="loader" style="position:fixed;inset:0;background:#0F0F1A;display:flex;
+align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s">
+  <div style="text-align:center">
+    <div style="width:50px;height:50px;border:3px solid rgba(124,58,237,0.3);
+    border-top:3px solid #7C3AED;border-radius:50%;animation:spin 1s linear infinite;
+    margin:0 auto 1rem"></div>
+    <p style="color:#A78BFA;font-family:'Space Grotesk',sans-serif">Laden...</p>
+  </div>
+</div>
+
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    setTimeout(() => loader.style.display = 'none', 500);
+  }, 1000);
+});
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+});
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  const btn = document.getElementById('themeToggle');
+  btn.textContent = document.body.classList.contains('light') ? '☀️ Light' : '🌙 Dark';
+}
+</script>
+
+</body>
+</html>
