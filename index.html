@@ -501,8 +501,14 @@
     <div class="contact-links">
 <a href="#" onclick="navigator.clipboard.writeText('alinoori30072002@gmail.com'); alert('E-Mail kopiert! 📋')" class="contact-link">✉️ alinoori30072002@gmail.com</a>
      <a href="tel:+4915209741599" class="contact-link">📱 +49 15209741599</a>
-<a href="Lebenslauf_Noori 1111.pdf" download class="contact-link">📄 Lebenslauf herunterladen</a>  
-<a href="Moduluebersicht schlicht.pdf" download class="contact-link">📋 Moduluebersicht herunterladen</a>  
+<a href="#" onclick="
+  var pw = prompt('Bitte Passwort eingeben:');
+  if(pw === 'UbiStack300720021!@') {
+    window.open('Lebenslauf_Noori 1111.pdf');
+  } else {
+    alert('Falsches Passwort!');
+  }
+" class="contact-link">📄 Lebenslauf herunterladen</a><a href="Moduluebersicht schlicht.pdf" download class="contact-link">📋 Moduluebersicht herunterladen</a>  
 </div>
   </div>
 </section>
